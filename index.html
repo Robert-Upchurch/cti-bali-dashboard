@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTI-USA — Client Event Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="CTI USA Logo">
+        <rect width="32" height="32" rx="8" fill="var(--color-primary)"/>
+        <text x="16" y="22" font-family="Inter, sans-serif" font-weight="700" font-size="13" fill="white" text-anchor="middle">CTI</text>
+      </svg>
+      <span class="sidebar-brand">CTI-USA</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-view="overview" onclick="switchView('overview')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Overview</span>
+      </button>
+      <button class="nav-item" data-view="calendar" onclick="switchView('calendar')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <span>Calendar</span>
+      </button>
+      <button class="nav-item" data-view="ciee" onclick="switchView('ciee')">
+        <div class="client-dot ciee-dot"></div>
+        <span>CIEE</span>
+      </button>
+      <button class="nav-item" data-view="allianz" onclick="switchView('allianz')">
+        <div class="client-dot allianz-dot"></div>
+        <span>Alliance Abroad</span>
+      </button>
+      <button class="nav-item" data-view="positions" onclick="switchView('positions')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <span>Positions</span>
+      </button>
+      <button class="nav-item" data-view="flights" onclick="switchView('flights')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        <span>Flights</span>
+      </button>
+      <div style="height:1px;background:var(--color-divider);margin:var(--space-2) var(--space-3);"></div>
+      <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-faint);padding:var(--space-1) var(--space-3) 0;">To-Do &amp; Tasks</div>
+      <button class="nav-item" data-view="cti-tasks" onclick="switchView('cti-tasks')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>CTI Tasks</span>
+      </button>
+      <button class="nav-item" data-view="todo-ciee" onclick="switchView('todo-ciee')">
+        <div class="client-dot ciee-dot"></div>
+        <span>CIEE Tasks</span>
+      </button>
+      <button class="nav-item" data-view="todo-aag" onclick="switchView('todo-aag')">
+        <div class="client-dot allianz-dot"></div>
+        <span>AAG Tasks</span>
+      </button>
+      <button class="nav-item" data-view="mexico" onclick="switchView('mexico')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span>Mexico SWT</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" class="pplx-credit">Perplexity Computer</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="main-content">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="topbar-title" id="page-title">Dashboard Overview</div>
+      <div class="topbar-meta">
+        <span class="badge badge-status">2 Active Clients</span>
+        <span class="badge badge-status">2 Bali Events</span>
+      </div>
+    </header>
+
+    <!-- OVERVIEW VIEW -->
+    <section class="view active" id="view-overview">
+      <div class="content-area">
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Bali Events</div>
+            <div class="kpi-value">2</div>
+            <div class="kpi-sub">CIEE + Alliance Abroad</div>
+          </div>
+          <div class="kpi-card kpi-ciee">
+            <div class="kpi-label">CIEE — Bali Event</div>
+            <div class="kpi-value">Apr 11</div>
+            <div class="kpi-sub">Hiring Event Day · 2026</div>
+          </div>
+          <div class="kpi-card kpi-allianz">
+            <div class="kpi-label">Alliance Abroad — Bali</div>
+            <div class="kpi-value">Mar 31</div>
+            <div class="kpi-sub">Mini Fair · Interviews · 2026</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Total Positions (Bali)</div>
+            <div class="kpi-value">54</div>
+            <div class="kpi-sub">Alliance Abroad: 24 · CIEE: 30</div>
+          </div>
+        </div>
+
+        <!-- TIMELINE STRIP -->
+        <div class="section-header">
+          <h2 class="section-title">Bali Events — Timeline</h2>
+        </div>
+        <div class="timeline-strip">
+
+          <!-- ALLIANCE ABROAD BLOCK -->
+          <div class="timeline-event allianz-event">
+            <div class="timeline-badge allianz-badge">ALLIANCE ABROAD</div>
+            <div class="timeline-days">
+              <div class="timeline-day">
+                <div class="tday-label">Sun–Mon</div>
+                <div class="tday-date">Mar 29–30</div>
+                <div class="tday-tag">Arrival (1–2 days prior)</div>
+              </div>
+              <div class="timeline-day highlight-day" style="border-color:var(--aag-border);background:var(--aag-bg);">
+                <div class="tday-label">Tue</div>
+                <div class="tday-date">Mar 31</div>
+                <div class="tday-tag" style="color:var(--aag-text);font-weight:700;">Interview Day</div>
+              </div>
+            </div>
+            <div class="timeline-details">
+              <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">Partner School — Bali</span></div>
+              <div class="detail-row"><span class="detail-key">Format</span><span class="detail-val">Mini Fair · In-person interviews</span></div>
+              <div class="detail-row"><span class="detail-key">Interviewers</span><span class="detail-val">2 OWC representatives</span></div>
+              <div class="detail-row"><span class="detail-key">Roles</span><span class="detail-val">Culinary &amp; Front Desk</span></div>
+              <div class="detail-row"><span class="detail-key">Host</span><span class="detail-val">Marriott International portfolio</span></div>
+              <div class="detail-row"><span class="detail-key">Contact</span><span class="detail-val">Lindsay Bongi — Director, Intern &amp; Trainee Programs</span></div>
+            </div>
+          </div>
+
+          <!-- CIEE BLOCK -->
+          <div class="timeline-event ciee-event">
+            <div class="timeline-badge ciee-badge">CIEE</div>
+            <div class="timeline-days">
+              <div class="timeline-day">
+                <div class="tday-label">Thu</div>
+                <div class="tday-date">Apr 9</div>
+                <div class="tday-tag">Arrival Day</div>
+              </div>
+              <div class="timeline-day">
+                <div class="tday-label">Fri</div>
+                <div class="tday-date">Apr 10</div>
+                <div class="tday-tag">Rest / Cultural</div>
+              </div>
+              <div class="timeline-day highlight-day">
+                <div class="tday-label">Sat</div>
+                <div class="tday-date">Apr 11</div>
+                <div class="tday-tag tday-main">Hiring Event</div>
+              </div>
+              <div class="timeline-day">
+                <div class="tday-label">Sun</div>
+                <div class="tday-date">Apr 12</div>
+                <div class="tday-tag">Travel Day</div>
+              </div>
+            </div>
+            <div class="timeline-details">
+              <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">Bali, Indonesia</span></div>
+              <div class="detail-row"><span class="detail-key">Format</span><span class="detail-val">SE Asia Road Show — Full Hiring Event</span></div>
+              <div class="detail-row"><span class="detail-key">Contact</span><span class="detail-val">Jessica Dubra · CIEE</span></div>
+              <div class="detail-row"><span class="detail-key">Planning Call</span><span class="detail-val">Feb 11, 2026 · Teams Meeting</span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CLIENTS OVERVIEW -->
+        <div class="two-col">
+          <!-- CIEE card -->
+          <div class="client-card ciee-card">
+            <div class="client-card-header">
+              <div class="client-badge ciee-badge-sm">CIEE</div>
+              <span class="client-card-title">CIEE BridgeUSA</span>
+            </div>
+            <div class="client-meta-rows">
+              <div class="cmr"><span>Program Year</span><span>FY26 (Sept 2025 – Aug 2026)</span></div>
+              <div class="cmr"><span>Intern Self-Placed</span><span class="num">10</span></div>
+              <div class="cmr"><span>Intern CIEE-Placed</span><span class="num">41</span></div>
+              <div class="cmr"><span>Bali Event</span><span>April 11, 2026</span></div>
+              <div class="cmr"><span>Primary Contact</span><span>Maggie Mullin</span></div>
+              <div class="cmr"><span>Program Types</span><span>Intern &amp; Trainee</span></div>
+            </div>
+            <div class="action-rows">
+              <div class="action-tag">CIEE Recap Meeting: Mar 4–5, 2026</div>
+              <div class="action-tag">Action: Follow-up call scheduled</div>
+              <div class="action-tag">2027 RS Planning in progress</div>
+            </div>
+          </div>
+
+          <!-- ALLIANCE card -->
+          <div class="client-card allianz-card">
+            <div class="client-card-header">
+              <div class="client-badge allianz-badge-sm">AAG</div>
+              <span class="client-card-title">Alliance Abroad</span>
+            </div>
+            <div class="client-meta-rows">
+              <div class="cmr"><span>Agreement</span><span>Signed Feb 19, 2026</span></div>
+              <div class="cmr"><span>Bali Mini Fair</span><span>March 31, 2026</span></div>
+              <div class="cmr"><span>Jakarta Fair</span><span>TBD (Grand Hyatt Vail)</span></div>
+              <div class="cmr"><span>Positions Available</span><span class="num">24 (Bali)</span></div>
+              <div class="cmr"><span>Primary Contact</span><span>Lindsay Bongi</span></div>
+              <div class="cmr"><span>Program Types</span><span>Intern &amp; Trainee (J-1)</span></div>
+            </div>
+            <div class="action-rows">
+              <div class="action-tag">Bali confirmed — all-hands Mar 17</div>
+              <div class="action-tag">Action: Jakarta school coordination</div>
+              <div class="action-tag">Action: Advertising materials in production</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CALENDAR VIEW -->
+    <section class="view" id="view-calendar">
+      <div class="content-area">
+        <div class="section-header">
+          <h2 class="section-title">Event Calendar — 2026</h2>
+        </div>
+
+        <div class="cal-legend">
+          <span class="leg-item"><span class="leg-dot ciee-dot"></span> CIEE</span>
+          <span class="leg-item"><span class="leg-dot allianz-dot"></span> Alliance Abroad</span>
+          <span class="leg-item"><span class="leg-dot both-dot"></span> Both</span>
+        </div>
+
+        <!-- MARCH 2026 -->
+        <div class="cal-month">
+          <div class="cal-month-label">March 2026</div>
+          <div class="cal-grid">
+            <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+            <!-- March starts on Sunday (1st) -->
+            <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4<div class="cal-event allianz-event-dot">CIEE Recap Mtg</div></div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
+            <div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day cal-today">10<div class="cal-event ciee-event-dot">CIEE Follow-up</div></div><div class="cal-day">11<div class="cal-event allianz-event-dot">AAG Partnership</div></div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div>
+            <div class="cal-day">15<div class="cal-event allianz-event-dot">AAG Positions Sent</div></div><div class="cal-day">16<div class="cal-event allianz-event-dot">Bali Confirmed</div></div><div class="cal-day cal-today-mark">17<span class="today-pill">Today</span></div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div>
+            <div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div>
+            <div class="cal-day allianz-bg">29<div class="cal-event allianz-event-dot">AAG Arrival</div></div><div class="cal-day allianz-bg">30<div class="cal-event allianz-event-dot">AAG Arrival</div></div><div class="cal-day cal-event-day allianz-bg">31<div class="cal-event allianz-event-dot cal-event-highlight">🗓 BALI Mini Fair</div></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+          </div>
+        </div>
+
+        <!-- APRIL 2026 -->
+        <div class="cal-month">
+          <div class="cal-month-label">April 2026</div>
+          <div class="cal-grid">
+            <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+            <!-- April 1 = Wednesday -->
+            <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div>
+            <div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day ciee-pre-bg">9<div class="cal-event ciee-event-dot">CIEE Arrival</div></div><div class="cal-day cal-event-day ciee-pre-bg">10<div class="cal-event ciee-event-dot">Rest/Cultural Day</div></div><div class="cal-day cal-event-day ciee-bg">11<div class="cal-event ciee-event-dot cal-event-highlight">🗓 BALI Hiring Event</div></div>
+            <div class="cal-day">12<div class="cal-event ciee-event-dot">Travel Day</div></div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div>
+            <div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div>
+            <div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+          </div>
+        </div>
+
+        <!-- KEY DATES TABLE -->
+        <div class="section-header" style="margin-top: var(--space-8);">
+          <h2 class="section-title">All Key Dates</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Client</th>
+                <th>Event</th>
+                <th>Location</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mono">Mar 4–5, 2026</td>
+                <td><span class="badge ciee-badge-inline">CIEE</span></td>
+                <td>US CTI Recap Lunch Meeting</td>
+                <td>In person</td>
+                <td><span class="status-pill done">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="mono">Mar 10, 2026</td>
+                <td><span class="badge ciee-badge-inline">CIEE</span></td>
+                <td>CIEE Follow-up / Recap Email</td>
+                <td>Remote</td>
+                <td><span class="status-pill done">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="mono">Mar 11, 2026</td>
+                <td><span class="badge allianz-badge-inline">AAG</span></td>
+                <td>Alliance Abroad Partnership Kickoff</td>
+                <td>CTI Offices</td>
+                <td><span class="status-pill done">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="mono">Mar 15, 2026</td>
+                <td><span class="badge allianz-badge-inline">AAG</span></td>
+                <td>Bali Mini Fair Request + Positions Sent</td>
+                <td>Remote</td>
+                <td><span class="status-pill done">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="mono">Mar 16, 2026</td>
+                <td><span class="badge allianz-badge-inline">AAG</span></td>
+                <td>Bali Confirmed by CTI</td>
+                <td>Remote</td>
+                <td><span class="status-pill done">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="mono">Mar 17, 2026</td>
+                <td><span class="badge allianz-badge-inline">AAG</span></td>
+                <td>All-hands Asia Team Logistics Call</td>
+                <td>Internal</td>
+                <td><span class="status-pill upcoming">Today</span></td>
+              </tr>
+              <tr>
+                <td class="mono">Mar 29–30, 2026</td>
+                <td><span class="badge allianz-badge-inline">AAG</span></td>
+                <td>BALI — Arrival (1–2 days prior)</td>
+                <td>Bali, Indonesia</td>
+                <td><span class="status-pill upcoming">Travel</span></td>
+              </tr>
+              <tr class="highlight-row allianz-row">
+                <td class="mono">Mar 31, 2026</td>
+                <td><span class="badge allianz-badge-inline">AAG</span></td>
+                <td>BALI Mini Fair — In-Person Interviews</td>
+                <td>Bali, Indonesia</td>
+                <td><span class="status-pill upcoming">14 days</span></td>
+              </tr>
+              <tr>
+                <td class="mono">Apr 9, 2026</td>
+                <td><span class="badge ciee-badge-inline">CIEE</span></td>
+                <td>BALI — Arrival Day</td>
+                <td>Bali, Indonesia</td>
+                <td><span class="status-pill upcoming">Travel</span></td>
+              </tr>
+              <tr class="highlight-row ciee-row">
+                <td class="mono">Apr 10, 2026</td>
+                <td><span class="badge ciee-badge-inline">CIEE</span></td>
+                <td>BALI — Rest &amp; Cultural Day</td>
+                <td>Bali, Indonesia</td>
+                <td><span class="status-pill upcoming">24 days</span></td>
+              </tr>
+              <tr class="highlight-row ciee-row">
+                <td class="mono">Apr 11, 2026</td>
+                <td><span class="badge ciee-badge-inline">CIEE</span></td>
+                <td>BALI — Hiring Event Day</td>
+                <td>Bali, Indonesia</td>
+                <td><span class="status-pill upcoming">25 days</span></td>
+              </tr>
+              <tr class="highlight-row ciee-row">
+                <td class="mono">Apr 12, 2026</td>
+                <td><span class="badge ciee-badge-inline">CIEE</span></td>
+                <td>BALI — Travel Day (Return)</td>
+                <td>Bali, Indonesia</td>
+                <td><span class="status-pill upcoming">26 days</span></td>
+              </tr>
+              <tr>
+                <td class="mono">TBD</td>
+                <td><span class="badge allianz-badge-inline">AAG</span></td>
+                <td>Jakarta Fair — Grand Hyatt Vail</td>
+                <td>Jakarta, Indonesia</td>
+                <td><span class="status-pill pending">Pending</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CIEE VIEW -->
+    <section class="view" id="view-ciee">
+      <div class="content-area">
+        <div class="client-hero ciee-hero">
+          <div class="client-hero-logo">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect width="48" height="48" rx="12" fill="#01696f"/>
+              <text x="24" y="32" font-family="Inter, sans-serif" font-weight="700" font-size="16" fill="white" text-anchor="middle">CIEE</text>
+            </svg>
+          </div>
+          <div>
+            <h1 class="client-hero-title">CIEE BridgeUSA</h1>
+            <p class="client-hero-sub">Intern &amp; Trainee Program — FY26</p>
+          </div>
+        </div>
+
+        <div class="kpi-grid kpi-grid-3">
+          <div class="kpi-card kpi-ciee">
+            <div class="kpi-label">Bali Event Date</div>
+            <div class="kpi-value">Apr 11, 2026</div>
+            <div class="kpi-sub">Hiring Event Day</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Intern Allocation (FY26)</div>
+            <div class="kpi-value">51</div>
+            <div class="kpi-sub">10 self-placed · 41 CIEE-placed</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">CIEE Bali Positions (Total)</div>
+            <div class="kpi-value">30</div>
+            <div class="kpi-sub">Culinary · F&amp;B</div>
+          </div>
+        </div>
+
+
+        <!-- PIPELINE UPDATE BANNER -->
+        <div style="background:#fef9c3;border:1px solid #fde047;border-radius:var(--radius-lg);padding:var(--space-3) var(--space-5);margin-bottom:var(--space-6);display:flex;align-items:center;gap:var(--space-3);">
+          <span style="font-size:1rem;">⚡</span>
+          <span style="font-size:var(--text-xs);font-weight:700;color:#854d0e;">Pipeline update received from Putu Astra (Data Operations Manager) — <strong>March 24, 2026</strong></span>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">Candidate Pipeline Status</h2>
+          <span style="font-size:var(--text-xs);color:var(--color-text-muted);background:var(--color-surface-offset);border-radius:var(--radius-full);padding:2px 10px;font-weight:600;">Updated Mar 24, 2026 · Putu Astra</span>
+        </div>
+        <div class="table-wrap" style="margin-bottom:var(--space-8);">
+          <table>
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th class="num">Total Demand</th>
+                <th class="num">Current Participants</th>
+                <th class="num">In Pipeline</th>
+                <th class="num">Still Needed</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Culinary</strong></td>
+                <td class="num">20</td>
+                <td class="num" style="color:#c53030;font-weight:700;">0</td>
+                <td class="num" style="color:#c53030;font-weight:700;">0</td>
+                <td class="num" style="color:#c53030;font-weight:700;">20 🚨</td>
+                <td><span class="status-pill" style="background:#fef2f2;color:#c53030;">Critical — 0 filled</span></td>
+              </tr>
+              <tr>
+                <td><strong>Food &amp; Beverage</strong></td>
+                <td class="num">10</td>
+                <td class="num" style="color:#437a22;font-weight:700;">4</td>
+                <td class="num" style="color:#437a22;font-weight:700;">21</td>
+                <td class="num" style="color:#437a22;font-weight:700;">0 ✓</td>
+                <td><span class="status-pill done">Pipeline full</span></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td><strong>TOTAL</strong></td>
+                <td class="num">30</td>
+                <td class="num">4</td>
+                <td class="num">21</td>
+                <td class="num">20</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:var(--radius-md);padding:var(--space-3) var(--space-5);margin-bottom:var(--space-8);font-size:var(--text-xs);color:#c53030;">
+          <strong>🚨 Critical:</strong> Culinary has 0 current participants and 0 in pipeline against a demand of 20. F&amp;B pipeline is strong (4 current + 21 pipeline). Immediate recruitment focus needed on Culinary candidates for the Apr 11 event.
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">CIEE Bali Road Show Schedule</h2>
+        </div>
+        <div class="day-schedule">
+          <div class="sched-day">
+            <div class="sched-date">
+              <div class="sched-dow">Thursday</div>
+              <div class="sched-d">Apr 9</div>
+            </div>
+            <div class="sched-content neutral-day">
+              <div class="sched-event-title">Arrival Day</div>
+              <p class="sched-notes">Team arrives in Bali. Check-in, settle in. 1–2 days before the hiring event.</p>
+            </div>
+          </div>
+          <div class="sched-day">
+            <div class="sched-date">
+              <div class="sched-dow">Friday</div>
+              <div class="sched-d">Apr 10</div>
+            </div>
+            <div class="sched-content neutral-day">
+              <div class="sched-event-title">Rest &amp; Cultural Day</div>
+              <p class="sched-notes">Team arrives / acclimatizes. Cultural immersion activities.</p>
+            </div>
+          </div>
+          <div class="sched-day">
+            <div class="sched-date ciee-date-col">
+              <div class="sched-dow">Saturday</div>
+              <div class="sched-d">Apr 11</div>
+            </div>
+            <div class="sched-content ciee-day-content">
+              <div class="sched-event-title">🗓 BALI HIRING EVENT DAY</div>
+              <p class="sched-notes">In-person hiring event. CTI presents candidates for CIEE host employer positions.</p>
+              <div class="employer-grid">
+                <div class="employer-chip">
+                  <div class="emp-name">Beemonk Hospitality Collection</div>
+                  <div class="emp-slots"><span class="emp-role">Culinary: 7</span> <span class="emp-role">F&amp;B: 4</span></div>
+                </div>
+                <div class="employer-chip">
+                  <div class="emp-name">Northern Hospitality Group</div>
+                  <div class="emp-slots"><span class="emp-role">Culinary: 6</span> <span class="emp-role">F&amp;B: 3</span></div>
+                </div>
+                <div class="employer-chip">
+                  <div class="emp-name">La Quinta Resort</div>
+                  <div class="emp-slots"><span class="emp-role">Culinary: 7</span> <span class="emp-role">F&amp;B: 3</span></div>
+                </div>
+              </div>
+              <div class="totals-row">
+                <span class="total-chip">Total Culinary: <strong>20</strong></span>
+                <span class="total-chip">Total F&amp;B: <strong>10</strong></span>
+                <span class="total-chip ciee-total">Grand Total: <strong>30 positions</strong></span>
+              </div>
+            </div>
+          </div>
+          <div class="sched-day">
+            <div class="sched-date">
+              <div class="sched-dow">Sunday</div>
+              <div class="sched-d">Apr 12</div>
+            </div>
+            <div class="sched-content neutral-day">
+              <div class="sched-event-title">Travel Day</div>
+              <p class="sched-notes">Return travel. All team departs Bali.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">CIEE Key Contacts</h2>
+        </div>
+        <div class="contacts-grid">
+          <div class="contact-card">
+            <div class="contact-name">Maggie Mullin</div>
+            <div class="contact-role">Sr. Director, International Sales</div>
+
+          </div>
+          <div class="contact-card">
+            <div class="contact-name">Angela Gorny</div>
+            <div class="contact-role">Sr. Director, Industry Partnerships</div>
+
+          </div>
+          <div class="contact-card">
+            <div class="contact-name">Jessica Dubra</div>
+            <div class="contact-role">SE Asia Road Show Organizer</div>
+            <div class="contact-email">CIEE</div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-name">Whitney Rosenberg</div>
+            <div class="contact-role">Manager, International Sales</div>
+
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">Open Action Items — CIEE</h2>
+        </div>
+        <div class="actions-list">
+          <div class="action-item">
+            <div class="action-check pending-check"></div>
+            <div class="action-text">
+              <div class="action-title">Schedule follow-up call with Maggie Mullin's team</div>
+              <div class="action-sub">Walk through action plan for HS program, Intern &amp; Trainee growth, WAT / Lifeguard recruitment</div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-check pending-check"></div>
+            <div class="action-text">
+              <div class="action-title">Develop growth proposal — Mexico, Brazil, South Africa</div>
+              <div class="action-sub">Include initial 2027 RS planning considerations</div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-check pending-check"></div>
+            <div class="action-text">
+              <div class="action-title">Share contacts at The Villages for HS Program</div>
+              <div class="action-sub">Introductions to FMK Group (Food &amp; Beverage)</div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-check pending-check"></div>
+            <div class="action-text">
+              <div class="action-title">Wintergreen Resort — candidate placement from Thailand</div>
+              <div class="action-sub">Coordinate with Angela Gorny re: Dusit Thani College Bangkok career fair · $17/hr · 12 months · housing $100/wk</div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-check done-check"></div>
+            <div class="action-text done-action">
+              <div class="action-title">CIEE Recap Meeting attended</div>
+              <div class="action-sub">Mar 4, 2026 — Notes confirmed accurate</div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-check done-check"></div>
+            <div class="action-text done-action">
+              <div class="action-title">Wire payment sent to CIEE</div>
+              <div class="action-sub">$12,732 · Jun 23, 2025 · INV356135, INV355789, INV355793, INV356130</div>
+            </div>
+          </div>
+        </div>
+
+
+        
+        
+        
+        
+        <div class="section-header"><h2 class="section-title">Team Notes</h2></div>
+        <div class="notes-box mexico-notes">
+          <div class="notes-toolbar">
+            <span class="notes-toolbar-label">📝 Team Notes</span>
+            <span class="notes-toolbar-hint">Cmd/Ctrl + Enter to save quickly</span>
+          </div>
+          <div class="notes-input-wrap">
+            <label class="notes-input-label" for="notes-input-mexico">New Note</label>
+            <textarea id="notes-input-mexico" class="notes-textarea"
+              placeholder="Add a note about Mexico SWT — e.g., document submission status, Pier Pennoyer updates..."
+              onkeydown="notesKeydown(event, 'mexico')"
+              oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+            <div class="notes-input-footer">
+              <span class="notes-auto-ts">
+                🕐 Will be stamped: <span class="notes-ts-live"></span>
+              </span>
+              <button class="notes-btn save-btn" onclick="saveNote('mexico')">＋ Add Note</button>
+            </div>
+          </div>
+          <div class="notes-feed-header">
+            <span class="notes-feed-label">Note History</span>
+            <span class="notes-feed-count" id="notes-count-mexico">0 notes</span>
+          </div>
+          <div class="notes-saved-list" id="notes-list-mexico">
+            <div class="notes-empty">No notes yet — type above and click Add Note.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="view" id="view-allianz">
+      <div class="content-area">
+        <div class="client-hero allianz-hero">
+          <div>
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect width="48" height="48" rx="12" fill="#1d4ed8"/>
+              <text x="24" y="32" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="white" text-anchor="middle">AAG</text>
+            </svg>
+          </div>
+          <div>
+            <h1 class="client-hero-title">Alliance Abroad Group</h1>
+            <p class="client-hero-sub">J-1 Recruitment Partner — Agreement signed Feb 19, 2026</p>
+          </div>
+        </div>
+
+        <div class="kpi-grid kpi-grid-3">
+          <div class="kpi-card kpi-allianz">
+            <div class="kpi-label">Bali Mini Fair</div>
+            <div class="kpi-value">Mar 31, 2026</div>
+            <div class="kpi-sub">Tuesday · <span id="aag-kpi-days">14</span> days away</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Positions (Bali)</div>
+            <div class="kpi-value">24</div>
+            <div class="kpi-sub">Culinary: 14 · Front Desk: 10</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Jakarta Fair</div>
+            <div class="kpi-value">TBD</div>
+            <div class="kpi-sub">Grand Hyatt Vail · Stri Ratna lead</div>
+          </div>
+        </div>
+
+
+        <!-- PIPELINE UPDATE BANNER -->
+        <div style="background:#fef9c3;border:1px solid #fde047;border-radius:var(--radius-lg);padding:var(--space-3) var(--space-5);margin-bottom:var(--space-6);display:flex;align-items:center;gap:var(--space-3);">
+          <span style="font-size:1rem;">⚡</span>
+          <span style="font-size:var(--text-xs);font-weight:700;color:#854d0e;">Pipeline update from Putu Astra (Data Operations Manager) — <strong>March 24, 2026</strong></span>
+        </div>
+        <div class="section-header">
+          <h2 class="section-title">Candidate Pipeline Status</h2>
+          <span style="font-size:var(--text-xs);color:var(--color-text-muted);background:var(--color-surface-offset);border-radius:var(--radius-full);padding:2px 10px;font-weight:600;">Updated Mar 24, 2026 · Putu Astra</span>
+        </div>
+        <div class="table-wrap" style="margin-bottom:var(--space-8);">
+          <table>
+            <thead><tr><th>Position</th><th class="num">Total Demand</th><th class="num">Current</th><th class="num">Pipeline</th><th class="num">Still Needed</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Culinary Kitchen Rotation</strong></td><td class="num">14</td><td class="num" style="color:#437a22;font-weight:700;">15</td><td class="num">4</td><td class="num" style="color:#437a22;font-weight:700;">0 ✓</td><td><span class="status-pill done">Overfilled +1</span></td></tr>
+              <tr><td><strong>Front Desk Rotation</strong></td><td class="num">10</td><td class="num" style="color:#c53030;font-weight:700;">3</td><td class="num">3</td><td class="num" style="color:#c53030;font-weight:700;">4 ⚠</td><td><span class="status-pill upcoming">Needs 4 more</span></td></tr>
+            </tbody>
+            <tfoot><tr><td><strong>TOTAL</strong></td><td class="num">24</td><td class="num">18</td><td class="num">7</td><td class="num">4</td><td></td></tr></tfoot>
+          </table>
+        </div>
+        <div style="background:var(--aag-bg);border:1px solid var(--aag-border);border-radius:var(--radius-md);padding:var(--space-3) var(--space-5);margin-bottom:var(--space-8);font-size:var(--text-xs);color:var(--aag-text);"><strong>Action needed:</strong> Front Desk Rotation is 4 candidates short. Prioritize recruiting <strong>Excellent English</strong> Front Desk candidates before Mar 31.</div>
+
+        <div class="section-header">
+          <h2 class="section-title">Bali Mini Fair — March 31, 2026</h2>
+        </div>
+        <div class="event-info-card allianz-info-card">
+          <div class="event-info-rows">
+            <div class="eir"><span>Date</span><span>Tuesday, March 31, 2026</span></div>
+            <div class="eir"><span>Location</span><span>Partner School, Bali, Indonesia</span></div>
+            <div class="eir"><span>Format</span><span>Day of in-person interviews only (NOT a full fair)</span></div>
+            <div class="eir"><span>Interviewers</span><span>2 OWC representatives (incl. Raquel Webb, HR Director, Orlando World Centre Marriott)</span></div>
+            <div class="eir"><span>CTI Obligation</span><span>Present candidates only — no accommodation or meals required</span></div>
+            <div class="eir"><span>Roles</span><span>Culinary Kitchen Rotation + Front Desk Rotation</span></div>
+            <div class="eir"><span>Arrival</span><span>Mar 29–30 (1–2 days prior to fair)</span></div>
+            <div class="eir"><span>Pending</span><span>Jakarta Fair — Grand Hyatt Vail (Stri Ratna leading, TBD)</span></div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">Alliance Abroad Key Contacts</h2>
+        </div>
+        <div class="contacts-grid">
+          <div class="contact-card">
+            <div class="contact-name">Lindsay Bongi</div>
+            <div class="contact-role">Director, Intern &amp; Trainee Programs</div>
+            <div class="contact-phone">+1 512 904 1136 · WhatsApp: 845.664.4127</div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-name">Courtney Bryant</div>
+            <div class="contact-role">Fair Manager</div>
+          </div>
+        </div>
+
+        <div class="section-header"><h2 class="section-title">Jakarta School Contacts</h2></div>
+        <div class="contacts-grid">
+          <div class="contact-card" style="border-top:3px solid #16a34a;">
+            <div class="contact-name">Dewi</div>
+            <div class="contact-role">MCSI — Jakarta Partner</div>
+            <div class="contact-phone">WhatsApp: Devi MCSI</div>
+          </div>
+          <div class="contact-card" style="border-top:3px solid #16a34a;">
+            <div class="contact-name">Rachmat (Pradita School)</div>
+            <div class="contact-role">Pradita School Coordinator — Jakarta</div>
+            <div class="contact-phone">Coordinating Apr 2 visit &amp; Apr 6 virtual interviews</div>
+          </div>
+          <div class="contact-card" style="border-top:3px solid #16a34a;">
+            <div class="contact-name">Johann</div>
+            <div class="contact-role">MCSI — MOU Recipient</div>
+            <div class="contact-phone">Updated MOU sent Mar 24, 2026</div>
+          </div>
+        </div>
+
+        <!-- JAKARTA UPDATE BANNER -->
+        <div style="background:#f0fdf4;border:1px solid #86efac;border-left:4px solid #22c55e;border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);margin-bottom:var(--space-6);">
+          <div style="font-size:var(--text-xs);font-weight:800;color:#166534;margin-bottom:var(--space-2);">✅ Jakarta Update — March 24, 2026 (WhatsApp with Dewi / MCSI)</div>
+          <div style="font-size:var(--text-xs);color:#166534;display:flex;flex-direction:column;gap:4px;">
+            <span>✓ <strong>MOU signed &amp; sent</strong> to Dewi and Johann — completed Mar 24</span>
+            <span>✓ <strong>Apr 2 school visit confirmed</strong> by Rachmat (Pradita) — morning visit, no interviews</span>
+            <span>⏳ <strong>Dewi offered program socialization</strong> during Apr 2 visit — awaiting Robert confirmation with Lindsay</span>
+            <span>⏳ <strong>Grand Hyatt virtual date</strong> (week Apr 6) — Dewi checking with Rachmat for exact day</span>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">Action Items — Alliance Abroad</h2>
+        </div>
+        <div class="actions-list" id="aag-actions">
+          <div class="action-item" onclick="toggleAction(this)" style="border-left: 3px solid #c53030;">
+            <div class="action-check urgent-check"></div>
+            <div class="action-text">
+              <div class="action-title">🔥 URGENT — Recruit candidates for Bali Mini Fair</div>
+              <div class="action-sub">All-hands Asia team today (Mar 17). Fair is March 31 — only 14 days away. Culinary &amp; Front Desk candidates needed.</div>
+            </div>
+          </div>
+          <div class="action-item" onclick="toggleAction(this)">
+            <div class="action-check pending-check"></div>
+            <div class="action-text">
+              <div class="action-title">Confirm Bali logistics with Lindsay Bongi</div>
+              <div class="action-sub">WhatsApp: 845.664.4127 · Confirm candidate list, interview schedule, and any logistics</div>
+            </div>
+          </div>
+          <div class="action-item" onclick="toggleAction(this)">
+            <div class="action-check pending-check"></div>
+            <div class="action-text">
+              <div class="action-title">Coordinate Jakarta school fair — Stri Ratna lead</div>
+              <div class="action-sub">Grand Hyatt Vail employer · Date TBD</div>
+            </div>
+          </div>
+          <div class="action-item" onclick="toggleAction(this)">
+            <div class="action-check pending-check"></div>
+            <div class="action-text">
+              <div class="action-title">Upload open positions to CTI website</div>
+              <div class="action-sub">Request asset bank from AAG: photos, job descriptions, location details for each property</div>
+            </div>
+          </div>
+          <div class="action-item" onclick="toggleAction(this)">
+            <div class="action-check pending-check"></div>
+            <div class="action-text">
+              <div class="action-title">Create Hanover CRM login</div>
+              <div class="action-sub">URL: https://aag.hanovercrm.com/ · Use email as username (forgot password reset available)</div>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-check done-check"></div>
+            <div class="action-text done-action">
+              <div class="action-title">Recruitment Partner Agreement signed</div>
+              <div class="action-sub">Feb 19, 2026 · Robert Upchurch + Adam Cooper (President, AAG)</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="section-header"><h2 class="section-title">Team Notes</h2></div>
+        <div class="notes-box aag-notes">
+          <div class="notes-toolbar">
+            <span class="notes-toolbar-label">📝 Team Notes</span>
+            <span class="notes-toolbar-hint">Cmd/Ctrl + Enter to save quickly</span>
+          </div>
+          <div class="notes-input-wrap">
+            <label class="notes-input-label" for="notes-input-aag">New Note</label>
+            <textarea id="notes-input-aag" class="notes-textarea"
+              placeholder="Add a note about Alliance Abroad — e.g., Bali logistics, Lindsay updates, candidate screening..."
+              onkeydown="notesKeydown(event, 'aag')"
+              oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+            <div class="notes-input-footer">
+              <span class="notes-auto-ts">
+                🕐 Will be stamped: <span class="notes-ts-live"></span>
+              </span>
+              <button class="notes-btn save-btn" onclick="saveNote('aag')">＋ Add Note</button>
+            </div>
+          </div>
+          <div class="notes-feed-header">
+            <span class="notes-feed-label">Note History</span>
+            <span class="notes-feed-count" id="notes-count-aag">0 notes</span>
+          </div>
+          <div class="notes-saved-list" id="notes-list-aag">
+            <div class="notes-entry">
+              <div class="notes-entry-meta">
+                <span class="notes-entry-time">10:27 AM</span>
+                <span class="notes-entry-date">Tue, Mar 24, 2026</span>
+              </div>
+              <span class="notes-entry-text">Confirm the time and date for Alliance Abroad to visit the school and how many interviews.<br><span style="color:var(--color-text-muted);font-size:0.75rem;">— Robert &amp; Ratna</span></span>
+            </div>
+            <div class="notes-entry">
+              <div class="notes-entry-meta">
+                <span class="notes-entry-time">10:27 AM</span>
+                <span class="notes-entry-date">Tue, Mar 24, 2026</span>
+              </div>
+              <span class="notes-entry-text">Confirm date at Jakarta University.<br><span style="color:var(--color-text-muted);font-size:0.75rem;">— Robert &amp; Ratna</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-positions">
+      <div class="content-area">
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Open Positions</div>
+            <div class="kpi-value">54</div>
+            <div class="kpi-sub">Both clients combined</div>
+          </div>
+          <div class="kpi-card kpi-allianz">
+            <div class="kpi-label">Alliance Abroad (Bali)</div>
+            <div class="kpi-value">24</div>
+            <div class="kpi-sub">Culinary: 14 · Front Desk: 10</div>
+          </div>
+          <div class="kpi-card kpi-ciee">
+            <div class="kpi-label">CIEE (Bali)</div>
+            <div class="kpi-value">30</div>
+            <div class="kpi-sub">Culinary: 20 · F&amp;B: 10</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Pay Range</div>
+            <div class="kpi-value">$17–21</div>
+            <div class="kpi-sub">Per hour · Alliance Abroad positions</div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">Alliance Abroad — Bali Positions (Mar 31)</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Job #</th>
+                <th>Host Property</th>
+                <th>Role</th>
+                <th class="num">Positions</th>
+                <th>Rate/hr</th>
+                <th>English</th>
+                <th>Program</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mono">23534</td>
+                <td>Ritz Carlton Fort Lauderdale</td>
+                <td>Culinary Kitchen Rotation</td>
+                <td class="num">5</td>
+                <td>$17.00</td>
+                <td><span class="eng-badge eng-ex">Excellent</span></td>
+                <td><span class="prog-badge both-prog">Both</span></td>
+              </tr>
+              <tr>
+                <td class="mono">23568</td>
+                <td>Sawgrass Marriott Golf Resort</td>
+                <td>Culinary Kitchen Rotation</td>
+                <td class="num">2</td>
+                <td>$17.00</td>
+                <td><span class="eng-badge eng-gd">Good</span></td>
+                <td><span class="prog-badge intern-only">Intern</span></td>
+              </tr>
+              <tr>
+                <td class="mono">23569</td>
+                <td>Sawgrass Marriott Golf Resort</td>
+                <td>Culinary Kitchen Rotation</td>
+                <td class="num">3</td>
+                <td>$17.00</td>
+                <td><span class="eng-badge eng-gd">Good</span></td>
+                <td><span class="prog-badge intern-only">Intern</span></td>
+              </tr>
+              <tr>
+                <td class="mono">25305</td>
+                <td>W Fort Lauderdale</td>
+                <td>Front Desk Rotation</td>
+                <td class="num">4</td>
+                <td>$20.00</td>
+                <td><span class="eng-badge eng-ex">Excellent</span></td>
+                <td><span class="prog-badge intern-only">Intern</span></td>
+              </tr>
+              <tr>
+                <td class="mono">25306</td>
+                <td>Orlando World Center Marriott</td>
+                <td>Culinary Kitchen Rotation</td>
+                <td class="num">4</td>
+                <td>$21.00</td>
+                <td><span class="eng-badge eng-gd">Good</span></td>
+                <td><span class="prog-badge both-prog">Both</span></td>
+              </tr>
+              <tr>
+                <td class="mono">25307</td>
+                <td>Orlando World Center Marriott</td>
+                <td>Front Desk Rotation</td>
+                <td class="num">3</td>
+                <td>$20.00</td>
+                <td><span class="eng-badge eng-ex">Excellent</span></td>
+                <td><span class="prog-badge">Trainee</span></td>
+              </tr>
+              <tr>
+                <td class="mono">25560</td>
+                <td>Miami Marriott Biscayne Bay</td>
+                <td>Front Desk Rotation</td>
+                <td class="num">3</td>
+                <td>$20.50</td>
+                <td><span class="eng-badge eng-ex">Excellent</span></td>
+                <td><span class="prog-badge both-prog">Both</span></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3"><strong>TOTAL — Alliance Abroad Bali</strong></td>
+                <td class="num">24</td>
+                <td>$17–$21/hr</td>
+                <td colspan="2"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">CIEE — Bali Positions (Apr 11)</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Host Employer</th>
+                <th>Location</th>
+                <th class="num">Culinary</th>
+                <th class="num">F&amp;B</th>
+                <th class="num">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Beemonk Hospitality Collection</td>
+                <td>Bali</td>
+                <td class="num">7</td>
+                <td class="num">4</td>
+                <td class="num"><strong>11</strong></td>
+              </tr>
+              <tr>
+                <td>Northern Hospitality Group</td>
+                <td>Bali</td>
+                <td class="num">6</td>
+                <td class="num">3</td>
+                <td class="num"><strong>9</strong></td>
+              </tr>
+              <tr>
+                <td>La Quinta Resort</td>
+                <td>Bali</td>
+                <td class="num">7</td>
+                <td class="num">3</td>
+                <td class="num"><strong>10</strong></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2"><strong>TOTAL — CIEE Bali</strong></td>
+                <td class="num">20</td>
+                <td class="num">10</td>
+                <td class="num">30</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+    
+    
+    <!-- ==================== FLIGHTS ==================== -->
+    <section class="view" id="view-flights">
+      <div class="content-area">
+
+        <div class="flight-trip-header">
+          <div>
+            <div class="fth-route">⭐ CTI Marine Travel — Booked Itinerary</div>
+            <div class="fth-sub">Refs: AA/CVSOVT · PR/A5L7GJ · GA/A5L7GJ · AS/YSCRNG</div>
+          </div>
+          <div class="fth-dates">
+            <div class="fth-date-range">Mar 28 → Apr 20, 2026</div>
+            <div class="fth-nights">MCO → LAX → MNL → DPS · (events) · DPS → CGK → BKK → MNL → SEA → MCO</div>
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SEGMENT 1: OUTBOUND  -->
+        <!-- ============================================================ -->
+        <div class="section-header" style="margin-top:var(--space-2);">
+          <h2 class="section-title">✈ Segment 1 — Outbound: Orlando → Bali</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="flight-compare-table">
+            <thead>
+              <tr><th>#</th><th>Flight</th><th>Airline</th><th>Route</th><th>Departs</th><th>Arrives</th><th>Flight Time</th><th>Stops</th><th>Cabin</th><th>Aircraft</th><th>Meal</th><th>Baggage</th><th>Ref</th></tr>
+            </thead>
+            <tbody>
+              <tr class="flt-cti">
+                <td style="color:var(--ciee-primary);font-weight:800;">Leg 1</td>
+                <td class="flt-num">AA 1928</td>
+                <td><strong>American Airlines</strong></td>
+                <td>MCO → LAX</td>
+                <td class="flt-time">Sat Mar 28 · 6:28 AM</td>
+                <td class="flt-time">Sat Mar 28 · 9:14 AM</td>
+                <td class="flt-dur">5h 46m</td>
+                <td><span class="flt-stop flt-nonstop">Nonstop</span></td>
+                <td><span class="flt-cabin flt-biz">Business (I)</span></td>
+                <td>A321neo</td><td>Breakfast</td><td>2PC</td>
+                <td class="flt-ref">AA/CVSOVT ✓</td>
+              </tr>
+              <tr class="flt-cti flt-layover-row">
+                <td colspan="13" class="flt-layover-cell">
+                  <span class="flt-layover-badge">🕐 LAX Layover: 2h 36m (Terminal B → Tom Bradley Intl Terminal)</span>
+                </td>
+              </tr>
+              <tr class="flt-cti">
+                <td style="color:var(--ciee-primary);font-weight:800;">Leg 2</td>
+                <td class="flt-num">PR 113</td>
+                <td><strong>Philippine Airlines</strong></td>
+                <td>LAX → MNL</td>
+                <td class="flt-time">Sat Mar 28 · 11:50 AM</td>
+                <td class="flt-time">Sun Mar 29 · 6:45 PM</td>
+                <td class="flt-dur">15h 55m</td>
+                <td><span class="flt-stop flt-nonstop">Nonstop</span></td>
+                <td><span class="flt-cabin flt-biz">Business (Z)</span></td>
+                <td>B777-300</td><td>Lunch</td><td>2PC</td>
+                <td class="flt-ref">PR/A5L7GJ ✓</td>
+              </tr>
+              <tr class="flt-cti flt-layover-row">
+                <td colspan="13" class="flt-layover-cell">
+                  <span class="flt-layover-badge">🕐 MNL Layover: 1h 10m (Terminal 1 → Terminal 1)</span>
+                </td>
+              </tr>
+              <tr class="flt-cti">
+                <td style="color:var(--ciee-primary);font-weight:800;">Leg 3</td>
+                <td class="flt-num">PR 537</td>
+                <td><strong>Philippine Airlines</strong></td>
+                <td>MNL → DPS</td>
+                <td class="flt-time">Sun Mar 29 · 7:55 PM</td>
+                <td class="flt-time">Sun Mar 29 · 11:55 PM 🛬</td>
+                <td class="flt-dur">4h 00m</td>
+                <td><span class="flt-stop flt-nonstop">Nonstop</span></td>
+                <td><span class="flt-cabin flt-biz">Business (Z)</span></td>
+                <td>A321</td><td>Dinner</td><td>2PC</td>
+                <td class="flt-ref">PR/A5L7GJ ✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+          <div class="flt-seg-summary" style="border-left:4px solid #f59e0b;">
+            <div class="fss-item"><span class="fss-label">Depart Date</span><span class="fss-value">Sat, Mar 28, 2026</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Flight Duration</span><span class="fss-value fss-big">25h 41m air time</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Layover Time</span><span class="fss-value">3h 46m (LAX 2h36m + MNL 1h10m)</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Total Segment Time</span><span class="fss-value fss-big">29h 27m door-to-door</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Total Cost</span><span class="fss-value fss-cost">$3,669 (outbound)<br><span style="font-size:0.7rem;color:var(--color-text-muted);font-weight:500;">Full trip cost via CTI Marine Travel</span></span></div>
+          </div>
+
+
+        <!-- ============================================================ -->
+        <!-- SEGMENT 2: IN-REGION  -->
+        <!-- ============================================================ -->
+        <div class="section-header">
+          <h2 class="section-title">🗺 Segment 2 — In-Region: Bali → Jakarta → Bangkok</h2>
+          <span style="font-size:var(--text-xs);color:var(--color-text-muted);">Includes multi-day event stays between flights</span>
+        </div>
+        <div class="table-wrap">
+          <table class="flight-compare-table">
+            <thead>
+              <tr><th>#</th><th>Flight</th><th>Airline</th><th>Route</th><th>Departs</th><th>Arrives</th><th>Flight Time</th><th>Stops</th><th>Cabin</th><th>Aircraft</th><th>Meal</th><th>Baggage</th><th>Ref</th></tr>
+            </thead>
+            <tbody>
+              <tr class="flt-cti">
+                <td style="color:var(--ciee-primary);font-weight:800;">Leg 4</td>
+                <td class="flt-num">GA 407</td>
+                <td><strong>Garuda Indonesia</strong></td>
+                <td>DPS → CGK (Jakarta)</td>
+                <td class="flt-time">Tue Apr 14 · 11:55 AM</td>
+                <td class="flt-time">Tue Apr 14 · 12:55 PM</td>
+                <td class="flt-dur">2h 00m</td>
+                <td><span class="flt-stop flt-nonstop">Nonstop</span></td>
+                <td><span class="flt-cabin">Economy (Y)</span></td>
+                <td>B737-800</td><td>Hot Meal</td><td>30kg</td>
+                <td class="flt-ref">GA/A5L7GJ ✓</td>
+              </tr>
+              <tr class="flt-cti flt-layover-row">
+                <td colspan="13" class="flt-layover-cell" style="background:#1a3a1a;">
+                  <span class="flt-layover-badge" style="background:#166534;color:#fff;">📅 Jakarta Event Stay: 3 days (Apr 14–17)</span>
+                </td>
+              </tr>
+              <tr class="flt-cti">
+                <td style="color:var(--ciee-primary);font-weight:800;">Leg 5</td>
+                <td class="flt-num">GA 866</td>
+                <td><strong>Garuda Indonesia</strong></td>
+                <td>CGK → BKK (Bangkok)</td>
+                <td class="flt-time">Fri Apr 17 · 9:30 AM</td>
+                <td class="flt-time">Fri Apr 17 · 1:10 PM</td>
+                <td class="flt-dur">3h 40m</td>
+                <td><span class="flt-stop flt-nonstop">Nonstop</span></td>
+                <td><span class="flt-cabin">Economy (V)</span></td>
+                <td>B737-800</td><td>Hot Meal</td><td>30kg</td>
+                <td class="flt-ref">GA/A5L7GJ ✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+          <div class="flt-seg-summary" style="border-left:4px solid #166534;">
+            <div class="fss-item"><span class="fss-label">Depart Date</span><span class="fss-value">Tue Apr 14 + Fri Apr 17</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Flight Duration</span><span class="fss-value fss-big">5h 40m air time</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Layover Time</span><span class="fss-value">3 days Jakarta stay</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Total Segment Time</span><span class="fss-value fss-big">3 days + 5h 40m</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Cost</span><span class="fss-value fss-cost">Incl. in package<br><span style="font-size:0.7rem;color:var(--color-text-muted);font-weight:500;">Garuda Economy legs</span></span></div>
+          </div>
+
+
+        <!-- ============================================================ -->
+        <!-- SEGMENT 3: RETURN  -->
+        <!-- ============================================================ -->
+        <div class="section-header">
+          <h2 class="section-title">✈ Segment 3 — Return: Bangkok → Orlando</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="flight-compare-table">
+            <thead>
+              <tr><th>#</th><th>Flight</th><th>Airline</th><th>Route</th><th>Departs</th><th>Arrives</th><th>Flight Time</th><th>Stops</th><th>Cabin</th><th>Aircraft</th><th>Meal</th><th>Baggage</th><th>Ref</th></tr>
+            </thead>
+            <tbody>
+              <tr class="flt-cti">
+                <td style="color:var(--ciee-primary);font-weight:800;">Leg 6</td>
+                <td class="flt-num">PR 731</td>
+                <td><strong>Philippine Airlines</strong></td>
+                <td>BKK → MNL</td>
+                <td class="flt-time">Sun Apr 19 · 1:25 PM</td>
+                <td class="flt-time">Sun Apr 19 · 6:00 PM</td>
+                <td class="flt-dur">3h 35m</td>
+                <td><span class="flt-stop flt-nonstop">Nonstop</span></td>
+                <td><span class="flt-cabin flt-biz">Business (D)</span></td>
+                <td>B777-300</td><td>Lunch</td><td>2PC</td>
+                <td class="flt-ref">PR/A5L7GJ ✓</td>
+              </tr>
+              <tr class="flt-cti flt-layover-row">
+                <td colspan="13" class="flt-layover-cell">
+                  <span class="flt-layover-badge">🕐 MNL Layover: 4h 35m (Terminal 1 → Terminal 1)</span>
+                </td>
+              </tr>
+              <tr class="flt-cti">
+                <td style="color:var(--ciee-primary);font-weight:800;">Leg 7</td>
+                <td class="flt-num">PR 124</td>
+                <td><strong>Philippine Airlines</strong></td>
+                <td>MNL → SEA</td>
+                <td class="flt-time">Sun Apr 19 · 10:35 PM</td>
+                <td class="flt-time">Sun Apr 19 · 8:05 PM</td>
+                <td class="flt-dur">12h 30m</td>
+                <td><span class="flt-stop flt-nonstop">Nonstop</span></td>
+                <td><span class="flt-cabin flt-biz">Business (D)</span></td>
+                <td>B777-300</td><td>Dinner</td><td>2PC</td>
+                <td class="flt-ref">PR/A5L7GJ ✓</td>
+              </tr>
+              <tr class="flt-cti flt-layover-row">
+                <td colspan="13" class="flt-layover-cell">
+                  <span class="flt-layover-badge">🕐 SEA Layover: 1h 00m</span>
+                </td>
+              </tr>
+              <tr class="flt-cti">
+                <td style="color:var(--ciee-primary);font-weight:800;">Leg 8</td>
+                <td class="flt-num">AS 771</td>
+                <td><strong>Alaska Airlines</strong></td>
+                <td>SEA → MCO</td>
+                <td class="flt-time">Sun Apr 19 · 9:05 PM</td>
+                <td class="flt-time">Mon Apr 20 · 5:39 AM 🏠</td>
+                <td class="flt-dur">5h 34m</td>
+                <td><span class="flt-stop flt-nonstop">Nonstop</span></td>
+                <td><span class="flt-cabin flt-biz">Business (D)</span></td>
+                <td>B737-800W</td><td>Cold Meal</td><td>2PC</td>
+                <td class="flt-ref">AS/YSCRNG ✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+          <div class="flt-seg-summary" style="border-left:4px solid #f59e0b;">
+            <div class="fss-item"><span class="fss-label">Depart Date</span><span class="fss-value">Sun, Apr 19, 2026</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Flight Duration</span><span class="fss-value fss-big">21h 39m air time</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Layover Time</span><span class="fss-value">5h 35m (MNL 4h35m + SEA 1h)</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Total Segment Time</span><span class="fss-value fss-big">27h 14m door-to-door</span></div>
+            <div class="fss-divider"></div>
+            <div class="fss-item"><span class="fss-label">Cost</span><span class="fss-value fss-cost">Incl. in package<br><span style="font-size:0.7rem;color:var(--color-text-muted);font-weight:500;">BKK→MNL→SEA→MCO</span></span></div>
+          </div>
+
+
+        <!-- ============================================================ -->
+        <!-- GRAND TOTAL SUMMARY -->
+        <!-- ============================================================ -->
+        <div class="flt-grand-total">
+          <div class="fgt-title">📊 Full Trip — CTI Travel Suggestion Summary</div>
+          <div class="fgt-grid">
+            <div class="fgt-item">
+              <div class="fgt-label">Depart</div>
+              <div class="fgt-value">Sat, Mar 28, 2026</div>
+              <div class="fgt-sub">6:28 AM · MCO Terminal B</div>
+            </div>
+            <div class="fgt-item">
+              <div class="fgt-label">Return</div>
+              <div class="fgt-value">Mon, Apr 20, 2026</div>
+              <div class="fgt-sub">5:39 AM · MCO Terminal B</div>
+            </div>
+            <div class="fgt-item fgt-highlight">
+              <div class="fgt-label">Total Air Time</div>
+              <div class="fgt-value">53h 00m</div>
+              <div class="fgt-sub">Across 8 flights</div>
+            </div>
+            <div class="fgt-item fgt-highlight">
+              <div class="fgt-label">Total Layover Time</div>
+              <div class="fgt-value">9h 21m</div>
+              <div class="fgt-sub">LAX 2h36 · MNL×2 5h45 · SEA 1h</div>
+            </div>
+            <div class="fgt-item fgt-highlight">
+              <div class="fgt-label">Total Flights</div>
+              <div class="fgt-value">8 legs</div>
+              <div class="fgt-sub">All nonstop segments</div>
+            </div>
+            <div class="fgt-item">
+              <div class="fgt-label">Cabin Class</div>
+              <div class="fgt-value">Primarily Business</div>
+              <div class="fgt-sub">Legs 4–5 in Economy (regional)</div>
+            </div>
+            <div class="fgt-item fgt-highlight">
+              <div class="fgt-label">Trip Duration</div>
+              <div class="fgt-value">23 days</div>
+              <div class="fgt-sub">Mar 28 → Apr 20</div>
+            </div>
+            <div class="fgt-item">
+              <div class="fgt-label">Booking Refs</div>
+              <div class="fgt-value" style="font-size:0.75rem;">AA/CVSOVT · PR/A5L7GJ<br>GA/A5L7GJ · AS/YSCRNG</div>
+              <div class="fgt-sub">All confirmed ✓</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ALTERNATIVE OUTBOUND -->
+        <!-- ============================================================ -->
+        <div class="section-header" style="margin-top:var(--space-8);">
+          <h2 class="section-title">🔍 Alternative Outbound Routes — MCO to Bali (Mar 28)</h2>
+          <span style="font-size:var(--text-xs);color:var(--color-text-muted);">Target: arrive DPS by Mar 29 · Source: Google Flights Mar 24, 2026</span>
+        </div>
+        <div class="table-wrap" style="margin-bottom:var(--space-4);">
+          <table class="flight-compare-table">
+            <thead>
+              <tr><th>Label</th><th>Airlines</th><th>Via</th><th>Departs MCO</th><th>Arrives DPS</th><th>Air Time</th><th>Layovers</th><th>Total Time</th><th>Cabin</th><th>Price</th></tr>
+            </thead>
+            <tbody>
+              <tr class="flt-cti">
+                <td><span class="flt-label-cti">⭐ CTI</span></td>
+                <td><strong>AA + Philippine</strong></td>
+                <td>LAX · MNL</td>
+                <td class="flt-time">6:28 AM Mar 28</td>
+                <td class="flt-time">11:55 PM Mar 29 ✓</td>
+                <td class="flt-dur">25h 41m</td>
+                <td>3h 46m</td>
+                <td class="flt-dur">29h 27m</td>
+                <td><span class="flt-cabin flt-biz">Full Business</span></td>
+                <td class="flt-price">$3,669</td>
+              </tr>
+              <tr class="flt-alt">
+                <td><span class="flt-label-comp">Alt 1</span></td>
+                <td>Alaska + EVA Air</td>
+                <td>SEA · TPE</td>
+                <td class="flt-time">6:33 PM Mar 28</td>
+                <td class="flt-time">3:15 PM Mar 30 ⚠</td>
+                <td class="flt-dur">~27h</td>
+                <td>~5h</td>
+                <td class="flt-dur">32h 42m</td>
+                <td><span class="flt-cabin flt-biz">Biz + 1st</span></td>
+                <td class="flt-price">$6,088</td>
+              </tr>
+              <tr class="flt-alt">
+                <td><span class="flt-label-comp">Alt 2</span></td>
+                <td>Air Canada + Emirates</td>
+                <td>YUL · DXB</td>
+                <td class="flt-time">6:10 PM Mar 28</td>
+                <td class="flt-time">10:25 PM Mar 30 ⚠</td>
+                <td class="flt-dur">~25h</td>
+                <td>~15h</td>
+                <td class="flt-dur">40h 15m</td>
+                <td><span class="flt-cabin flt-biz">Business</span></td>
+                <td class="flt-price">$4,963</td>
+              </tr>
+              <tr class="flt-alt">
+                <td><span class="flt-label-comp">Alt 3</span></td>
+                <td>WestJet + Cathay Pacific</td>
+                <td>YYZ · HKG</td>
+                <td class="flt-time">9:15 PM Mar 28</td>
+                <td class="flt-time">3:00 PM Mar 30 ⚠</td>
+                <td class="flt-dur">~24h</td>
+                <td>~6h</td>
+                <td class="flt-dur">29h 45m</td>
+                <td><span class="flt-cabin flt-biz">Mixed (Econ leg 1)</span></td>
+                <td class="flt-price">$6,077</td>
+              </tr>
+              <tr class="flt-alt">
+                <td><span class="flt-label-comp">Alt 4</span></td>
+                <td>JetBlue + Cathay Pacific</td>
+                <td>BOS · HKG</td>
+                <td class="flt-time">7:05 PM Mar 28</td>
+                <td class="flt-time">3:00 PM Mar 30 ⚠</td>
+                <td class="flt-dur">~24h</td>
+                <td>~8h</td>
+                <td class="flt-dur">31h 55m</td>
+                <td><span class="flt-cabin flt-biz">Mixed (Econ leg 1)</span></td>
+                <td class="flt-price">$6,524</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flt-seg-summary" style="border-left:4px solid #166534;margin-bottom:var(--space-8);">
+          <div class="fss-item"><span class="fss-label">CTI Depart</span><span class="fss-value">Mar 28 · 6:28 AM</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">CTI Arrive Bali</span><span class="fss-value fss-big">Mar 29 · 11:55 PM ✓</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">CTI Total Time</span><span class="fss-value fss-big">29h 27m</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">CTI Price</span><span class="fss-value fss-cost">$3,669</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">Verdict</span><span class="fss-value" style="color:#166534;font-weight:800;">✅ CTI Best — Cheapest &amp; Only Mar 29 Arrival</span></div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ALTERNATIVE RETURN -->
+        <!-- ============================================================ -->
+        <div class="section-header">
+          <h2 class="section-title">🔍 Alternative Return Routes — Bali to Orlando</h2>
+          <span style="font-size:var(--text-xs);color:var(--color-text-muted);">Source: Google Flights Mar 24, 2026</span>
+        </div>
+        <div class="table-wrap" style="margin-bottom:var(--space-4);">
+          <table class="flight-compare-table">
+            <thead>
+              <tr><th>Label</th><th>Airlines</th><th>Via</th><th>Departs DPS</th><th>Arrives MCO</th><th>Air Time</th><th>Layovers</th><th>Total Time</th><th>Cabin</th><th>Price</th></tr>
+            </thead>
+            <tbody>
+              <tr class="flt-cti">
+                <td><span class="flt-label-cti">⭐ CTI</span></td>
+                <td><strong>Garuda + Philippine + Alaska</strong></td>
+                <td>CGK · BKK · MNL · SEA</td>
+                <td class="flt-time">Apr 14 11:55 AM</td>
+                <td class="flt-time">Apr 20 5:39 AM</td>
+                <td class="flt-dur">27h 19m</td>
+                <td>6d + 6h 35m</td>
+                <td class="flt-dur">6 days (w/events)</td>
+                <td><span class="flt-cabin flt-biz">Mixed</span></td>
+                <td>—</td>
+              </tr>
+              <tr class="flt-best-alt">
+                <td><span class="flt-label-best">✓ Fastest</span></td>
+                <td>China Airlines + Alaska</td>
+                <td>TPE · SEA</td>
+                <td class="flt-time">Apr 14 3:55 PM</td>
+                <td class="flt-time">Apr 15 5:39 AM</td>
+                <td class="flt-dur">~22h</td>
+                <td>~4h</td>
+                <td class="flt-dur">25h 44m</td>
+                <td><span class="flt-cabin flt-biz">Full Business</span></td>
+                <td class="flt-price">$4,022</td>
+              </tr>
+              <tr class="flt-alt">
+                <td><span class="flt-label-comp">Alt 2</span></td>
+                <td>Etihad + JetBlue</td>
+                <td>AUH · JFK</td>
+                <td class="flt-time">Apr 12 6:45 PM</td>
+                <td class="flt-time">Apr 13 2:55 PM</td>
+                <td class="flt-dur">~27h</td>
+                <td>~5h</td>
+                <td class="flt-dur">32h 10m</td>
+                <td><span class="flt-cabin flt-biz">Biz Suite (Econ last)</span></td>
+                <td class="flt-price">$4,040</td>
+              </tr>
+              <tr class="flt-alt">
+                <td><span class="flt-label-comp">Alt 3</span></td>
+                <td>Korean Air + Delta</td>
+                <td>ICN · ATL</td>
+                <td class="flt-time">Apr 12 11:45 PM</td>
+                <td class="flt-time">Apr 13 10:02 PM</td>
+                <td class="flt-dur">~27h</td>
+                <td>~7h</td>
+                <td class="flt-dur">34h 17m</td>
+                <td><span class="flt-cabin flt-biz">Mixed (Econ leg 1)</span></td>
+                <td class="flt-price">$4,189</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flt-seg-summary" style="border-left:4px solid #22c55e;margin-bottom:var(--space-8);">
+          <div class="fss-item"><span class="fss-label">Fastest Return</span><span class="fss-value fss-big">25h 44m</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">Airline</span><span class="fss-value">China Airlines + Alaska</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">Departs</span><span class="fss-value">Apr 14 · 3:55 PM</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">Arrives MCO</span><span class="fss-value fss-big">Apr 15 · 5:39 AM</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">Price</span><span class="fss-value fss-cost">$4,022</span></div>
+          <div class="fss-divider"></div>
+          <div class="fss-item"><span class="fss-label">Saves</span><span class="fss-value" style="color:#166534;font-weight:800;">5 days vs CTI route</span></div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+    <!-- ==================== CIEE TO-DO ==================== -->
+    
+
+    <!-- ==================== CTI INTERNAL TASKS ==================== -->
+    <section class="view" id="view-cti-tasks">
+      <div class="content-area">
+        <div class="client-hero" style="border-top:4px solid #1a1916;background:var(--color-surface);">
+          <div>
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect width="48" height="48" rx="12" fill="#1a1916"/>
+              <text x="24" y="32" font-family="Arial,sans-serif" font-weight="700" font-size="12" fill="white" text-anchor="middle">CTI</text>
+            </svg>
+          </div>
+          <div>
+            <h1 class="client-hero-title">CTI Internal Task Tracker</h1>
+            <p class="client-hero-sub">Bali Mar 31 · Jakarta Virtual &amp; In-Person · New Opportunities · Admin · Source: WhatsApp 3/24/2026</p>
+          </div>
+          <div style="margin-left:auto;">
+            <span class="task-counter" id="task-counter-cti">Loading...</span>
+          </div>
+        </div>
+
+        <div style="background:#fef9c3;border:1px solid #fde047;border-radius:var(--radius-lg);padding:var(--space-3) var(--space-5);margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3);">
+          <span style="font-size:1rem;">💬</span>
+          <span style="font-size:var(--text-xs);font-weight:700;color:#854d0e;">Tasks extracted from WhatsApp conversation — <strong>March 24, 2026</strong> · Lindsay Bongi, Robert, Eduardo, Stri Ratna</span>
+        </div>
+
+        <div class="task-tracker-wrap">
+          <div class="task-tracker-header">
+            <span class="task-tracker-title">📋 CTI Task Tracker</span>
+            <div class="task-tracker-meta">
+              <button class="export-btn" onclick="exportTasksCSV('cti')">⬇ Export CSV</button>
+            </div>
+          </div>
+          <div class="task-filter-bar">
+            <span class="filter-label">Filter:</span>
+            <button class="filter-btn filter-btn-active" data-filter-client="cti" data-filter-val="All" onclick="filterTasks('cti','All')">All</button>
+            <button class="filter-btn" data-filter-client="cti" data-filter-val="Not Started" onclick="filterTasks('cti','Not Started')">Not Started</button>
+            <button class="filter-btn" data-filter-client="cti" data-filter-val="In Progress" onclick="filterTasks('cti','In Progress')">In Progress</button>
+            <button class="filter-btn" data-filter-client="cti" data-filter-val="Waiting" onclick="filterTasks('cti','Waiting')">Waiting</button>
+            <button class="filter-btn" data-filter-client="cti" data-filter-val="Completed" onclick="filterTasks('cti','Completed')">Completed</button>
+            <span style="font-size:var(--text-xs);color:var(--color-text-faint);margin-left:var(--space-3);">Categories: Bali Mar 31 · Jakarta · New Opportunity · Admin</span>
+          </div>
+          <div class="task-grid-container">
+            <div id="task-grid-cti">Loading tasks...</div>
+          </div>
+          <div class="task-legend">
+            <span class="tleg-item"><span class="tleg-dot" style="background:#ef4444"></span>Urgent</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#3b82f6"></span>In Progress</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#eab308"></span>Waiting</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#22c55e"></span>Completed</span>
+            <span class="tleg-item" style="margin-left:auto;font-style:italic;font-size:var(--text-xs);color:var(--color-text-faint);">Click any cell to edit · Dropdowns for status &amp; assigned</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TASK TRACKER: CIEE BRIDGEUSA ==================== -->
+    <section class="view" id="view-todo-ciee">
+      <div class="content-area">
+        <div class="client-hero ciee-hero">
+          <div><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#01696f"/><text x="24" y="32" font-family="Arial,sans-serif" font-weight="700" font-size="16" fill="white" text-anchor="middle">CIEE</text></svg></div>
+          <div>
+            <h1 class="client-hero-title">CIEE BridgeUSA — Task Tracker</h1>
+            <p class="client-hero-sub">Bali Hiring Event · Mexico SWT 2026 · Program Management</p>
+          </div>
+          <div style="margin-left:auto;">
+            <span class="task-counter" id="task-counter-ciee">Loading...</span>
+          </div>
+        </div>
+
+        <div class="task-tracker-wrap">
+          <div class="task-tracker-header">
+            <span class="task-tracker-title">📋 Task Tracker</span>
+            <div class="task-tracker-meta">
+              <button class="export-btn" onclick="exportTasksCSV('ciee')">⬇ Export CSV</button>
+            </div>
+          </div>
+          <div class="task-filter-bar">
+            <span class="filter-label">Filter:</span>
+            <button class="filter-btn filter-btn-active" data-filter-client="ciee" data-filter-val="All" onclick="filterTasks('ciee','All')">All</button>
+            <button class="filter-btn" data-filter-client="ciee" data-filter-val="Not Started" onclick="filterTasks('ciee','Not Started')">Not Started</button>
+            <button class="filter-btn" data-filter-client="ciee" data-filter-val="In Progress" onclick="filterTasks('ciee','In Progress')">In Progress</button>
+            <button class="filter-btn" data-filter-client="ciee" data-filter-val="Waiting" onclick="filterTasks('ciee','Waiting')">Waiting</button>
+            <button class="filter-btn" data-filter-client="ciee" data-filter-val="Completed" onclick="filterTasks('ciee','Completed')">Completed</button>
+          </div>
+          <div class="task-grid-container">
+            <div id="task-grid-ciee">Loading tasks...</div>
+          </div>
+          <div class="task-legend">
+            <span class="tleg-item"><span class="tleg-dot" style="background:#ef4444"></span>Urgent</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#3b82f6"></span>In Progress</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#eab308"></span>Waiting</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#22c55e"></span>Completed</span>
+            <span class="tleg-item" style="margin-left:auto;font-style:italic;">Click any cell to edit · Dropdowns for status &amp; assigned · Dates auto-recorded on completion</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== AAG TO-DO ==================== -->
+    
+    <!-- ==================== TASK TRACKER: ALLIANCE ABROAD ==================== -->
+    <section class="view" id="view-todo-aag">
+      <div class="content-area">
+        <div class="client-hero allianz-hero">
+          <div><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#1d4ed8"/><text x="24" y="32" font-family="Arial,sans-serif" font-weight="700" font-size="13" fill="white" text-anchor="middle">AAG</text></svg></div>
+          <div>
+            <h1 class="client-hero-title">Alliance Abroad — Task Tracker</h1>
+            <p class="client-hero-sub">Bali Mini Fair Mar 31 · Jakarta Fair · Program Setup</p>
+          </div>
+          <div style="margin-left:auto;">
+            <span class="task-counter" id="task-counter-aag">Loading...</span>
+          </div>
+        </div>
+
+        <div class="task-tracker-wrap">
+          <div class="task-tracker-header">
+            <span class="task-tracker-title">📋 Task Tracker</span>
+            <div class="task-tracker-meta">
+              <button class="export-btn" onclick="exportTasksCSV('aag')">⬇ Export CSV</button>
+            </div>
+          </div>
+          <div class="task-filter-bar">
+            <span class="filter-label">Filter:</span>
+            <button class="filter-btn filter-btn-active" data-filter-client="aag" data-filter-val="All" onclick="filterTasks('aag','All')">All</button>
+            <button class="filter-btn" data-filter-client="aag" data-filter-val="Not Started" onclick="filterTasks('aag','Not Started')">Not Started</button>
+            <button class="filter-btn" data-filter-client="aag" data-filter-val="In Progress" onclick="filterTasks('aag','In Progress')">In Progress</button>
+            <button class="filter-btn" data-filter-client="aag" data-filter-val="Waiting" onclick="filterTasks('aag','Waiting')">Waiting</button>
+            <button class="filter-btn" data-filter-client="aag" data-filter-val="Completed" onclick="filterTasks('aag','Completed')">Completed</button>
+          </div>
+          <div class="task-grid-container">
+            <div id="task-grid-aag">Loading tasks...</div>
+          </div>
+          <div class="task-legend">
+            <span class="tleg-item"><span class="tleg-dot" style="background:#ef4444"></span>Urgent</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#3b82f6"></span>In Progress</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#eab308"></span>Waiting</span>
+            <span class="tleg-item"><span class="tleg-dot" style="background:#22c55e"></span>Completed</span>
+            <span class="tleg-item" style="margin-left:auto;font-style:italic;">Click any cell to edit · Dropdowns for status &amp; assigned · Dates auto-recorded on completion</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== MEXICO SWT ==================== -->
+    <section class="view" id="view-mexico">
+      <div class="content-area">
+        <div class="mexico-hero">
+          <div>
+            <div class="mx-title">Mexico — CIEE Summer Work &amp; Travel 2026</div>
+            <div class="mx-sub">New agent compliance onboarding · Contact: Pier Pennoyer, CIEE Account Manager</div>
+          </div>
+          <div><span class="mx-badge">Program Window: May 15 – Oct 2, 2026</span></div>
+        </div>
+        <div class="kpi-grid kpi-grid-3">
+          <div class="kpi-card" style="border-left:3px solid #16a34a;"><div class="kpi-label">Program Opens</div><div class="kpi-value">May 15</div><div class="kpi-sub">2026 · Mexico SWT</div></div>
+          <div class="kpi-card" style="border-left:3px solid #16a34a;"><div class="kpi-label">Program Closes</div><div class="kpi-value">Oct 2</div><div class="kpi-sub">2026 · 4.5 months total</div></div>
+          <div class="kpi-card" style="border-left:3px solid #c53030;"><div class="kpi-label">Compliance Docs Due</div><div class="kpi-value">ASAP</div><div class="kpi-sub">9 documents required</div></div>
+        </div>
+        <div class="section-header"><h2 class="section-title">Required Compliance Documents</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Document</th><th>Notes</th><th>Reuse from PREX?</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><strong>CIEE Foreign Entity Report</strong></td><td>All office addresses &amp; contacts for Mexico</td><td>No — Mexico-specific</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+              <tr><td>2</td><td><strong>WAT Fee Disclosure Form 2026</strong></td><td>Highest possible pricing. Template provided.</td><td>No — annual update</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+              <tr><td>3</td><td><strong>Retail Pricing Template 2026</strong></td><td>Annual retail pricing, highest possible pricing</td><td>No — annual update</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+              <tr><td>4</td><td><strong>Beacon Emergency Contact Sheet</strong></td><td>Primary + Secondary Emergency Contact for SWT participants</td><td>Check if current</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+              <tr><td>5</td><td><strong>Third-Party Relationship Declaration</strong></td><td>Only if working with third parties. Skip if none.</td><td>Yes, if unchanged</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+              <tr><td>6</td><td><strong>Bankruptcy Disclosure</strong></td><td>Company letterhead. Dated within past year.</td><td>Yes, if current</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+              <tr><td>7</td><td><strong>Business License — Mexico</strong></td><td>Original + unofficial English translation</td><td>No — Mexico-specific</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+              <tr><td>8</td><td><strong>Criminal Background Checks</strong></td><td>All owners/officers. Within past year. + official English translation.</td><td>Yes, if within 1 year</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+              <tr><td>9</td><td><strong>Notarized Financial Statement</strong></td><td>Balance sheet + income statement. Unofficial English translation.</td><td>Yes, if current</td><td><span class="status-pill upcoming">Pending</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section-header"><h2 class="section-title">CIEE Contact — Mexico SWT</h2></div>
+        <div class="contacts-grid">
+          <div class="contact-card"><div class="contact-name">Pier Pennoyer</div><div class="contact-role">Account Manager, International Sales · CIEE</div><div class="contact-phone">400 Congress St., Suite 316, Portland, ME 04101</div></div>
+          <div class="contact-card"><div class="contact-name">Maggie Mullin</div><div class="contact-role">Sr. Director, International Sales · CIEE</div></div>
+        </div>
+        
+        <div class="section-header"><h2 class="section-title">Team Notes</h2></div>
+        <div class="notes-box mexico-notes">
+          <div class="notes-toolbar">
+            <span class="notes-toolbar-label">📝 Team Notes</span>
+            <span class="notes-toolbar-hint">Cmd/Ctrl + Enter to save quickly</span>
+          </div>
+          <div class="notes-input-wrap">
+            <label class="notes-input-label" for="notes-input-mexico">New Note</label>
+            <textarea id="notes-input-mexico" class="notes-textarea"
+              placeholder="Add a note about Mexico SWT — e.g., document submission status, Pier Pennoyer updates, candidate pipeline..."
+              onkeydown="notesKeydown(event, 'mexico')"
+              oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+            <div class="notes-input-footer">
+              <span class="notes-auto-ts">
+                🕐 Will be stamped: <span class="notes-ts-live"></span>
+              </span>
+              <button class="notes-btn save-btn" onclick="saveNote('mexico')">＋ Add Note</button>
+            </div>
+          </div>
+          <div class="notes-feed-header">
+            <span class="notes-feed-label">Note History</span>
+            <span class="notes-feed-count" id="notes-count-mexico">0 notes</span>
+          </div>
+          <div class="notes-saved-list" id="notes-list-mexico">
+            <div class="notes-empty">No notes yet — type above and click Add Note.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
